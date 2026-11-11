@@ -15,7 +15,7 @@
 
   // ---------- MỤC LỤC CHƯƠNG TRÌNH ----------
   $("#progIndex").innerHTML = [...document.querySelectorAll(".prog")].map(p =>
-    `<li><a href="#${p.id}">${p.querySelector(".prog-no").textContent} · ${p.querySelector("h3").textContent.split("·")[0].replace(/"/g, "").trim()}</a></li>`).join("");
+    `<li><a href="#${p.id}"><b>${p.querySelector(".prog-no").textContent}</b><span>${p.querySelector("h3").textContent.split("·")[0].replace(/"/g, "").trim()}</span></a></li>`).join("");
 
   // ---------- NGŨ HÀNH ----------
   $("#nguHanh").innerHTML = D.nguHanh.map((n, i) => `

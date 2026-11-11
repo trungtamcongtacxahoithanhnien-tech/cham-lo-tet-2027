@@ -98,9 +98,13 @@ p{margin:0 0 1em}
 
 /* ---------- PROGRAMS ---------- */
 .programs{padding-bottom:0;background:var(--cream)}
-.prog-index{list-style:none;padding:0;margin:36px auto 0;display:flex;flex-wrap:wrap;gap:10px;justify-content:center;max-width:960px}
-.prog-index a{display:block;text-decoration:none;padding:8px 14px;background:#fff;border:3px solid var(--ink);font-weight:600;font-size:14px;box-shadow:3px 3px 0 var(--ink)}
-.prog-index a:hover{background:var(--gold)}
+.prog-index{list-style:none;padding:0;margin:36px auto 0;display:flex;flex-wrap:wrap;gap:14px;justify-content:center;max-width:1000px}
+.prog-index li{flex:0 0 calc(25% - 11px);display:flex}
+.prog-index a{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;text-align:center;text-decoration:none;padding:12px 12px 14px;min-height:96px;background:#fff;border:3px solid var(--ink);box-shadow:4px 4px 0 var(--ink);transition:transform .15s,background .15s}
+.prog-index a b{font-family:"VT323",monospace;font-size:26px;line-height:1;color:var(--red)}
+.prog-index a span{font-weight:600;font-size:14px;line-height:1.35}
+.prog-index a:hover{background:var(--gold);transform:translate(-2px,-2px)}
+@media(max-width:820px){.prog-index li{flex-basis:calc(50% - 7px)}.prog-index a{min-height:84px}}
 .prog{padding:90px 0;position:relative;overflow:hidden}
 .prog-grid{display:grid;grid-template-columns:.9fr 1.1fr;gap:48px;align-items:center}
 .prog-grid.rev .prog-info{order:2}
