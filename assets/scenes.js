@@ -3,7 +3,7 @@
 // ======================================================================
 (function () {
   const SP = n => `assets/sprites/${n}.png`;
-  const PRELOAD = ["tnv_nam","tnv_nam_di1","tnv_nam_di2","tnv_nam_omqua","tnv_nam_traoqua","tnv_nu","tnv_nu_lixi","be_trai","be_trai_nhay","be_trai_omqua","be_gai","be_gai_lixi","ba_cu","bo_doi","bac_si","mc","c_thuongbinh","c_sinhvien","c_ongdo","c_cattoc","c_dacau","c_cau","c_vetranh","c_guitar","c_naubanh","q_hopqua","q_chongqua","q_banhchung","q_lixi","q_mai","q_dao","q_denlong","q_co","q_xedap","q_thuoc","q_balo","q_cuc","b_xebus","b_taiche","b_hienmau","b_photobooth","b_cayled","b_oanquan","b_leu","b_ghecattoc"];
+  const PRELOAD = ["tnv_nam","tnv_nam_di1","tnv_nam_di2","tnv_nam_omqua","tnv_nam_traoqua","tnv_nu","tnv_nu_lixi","be_trai","be_trai_nhay","be_trai_omqua","be_gai","be_gai_lixi","ba_cu","bo_doi","bac_si","mc","c_thuongbinh","c_sinhvien","c_ongdo","c_cattoc","c_dacau","c_cau","c_vetranh","c_guitar","c_naubanh","q_hopqua","q_chongqua","q_banhchung","q_lixi","q_mai","q_dao","q_denlong","q_co","q_xedap","q_thuoc","q_balo","q_cuc","b_xebus","b_taiche","b_hienmau","b_photobooth","b_cayled","b_oanquan","b_leu","b_ghecattoc","ba_ngoighe","fx_xu","fx_mai","fx_dao","fx_lapLanh","fx_bui","fx_khoi","fx_notnhac","fx_toc","fx_phaohoa_vang","fx_phaohoa_do","fx_phaohoa_xanh"];
   PRELOAD.forEach(n => { const i = new Image(); i.src = SP(n); });
 
   class Stop extends Error {}
@@ -56,17 +56,16 @@
       if (!l) { l = document.createElement("div"); l.className = cls; this.el.appendChild(l); }
       l.textContent = text; return l;
     }
-    // hạt pixel bay lên / tỏa ra
-    burst(x, y, { n = 14, colors = ["#f2c14e", "#e2453a", "#fff"], spread = 12, up = 18, size = 1.2, dur = 900, shape } = {}) {
+    // hạt hiệu ứng: dùng sprite vẽ bằng Gemini (fx_*.png)
+    burst(x, y, { n = 14, img = ["fx_lapLanh", "fx_xu", "fx_mai", "fx_dao"], spread = 12, up = 18, size = 1.2, dur = 900, spin = true } = {}) {
       for (let i = 0; i < n; i++) {
-        const p = document.createElement("div");
-        p.className = "fx";
-        const c = colors[i % colors.length];
-        p.style.cssText = `left:${x}%;bottom:${y}%;width:${size}%;aspect-ratio:1;background:${c}`;
-        if (shape) { p.textContent = shape; p.style.cssText = `left:${x}%;bottom:${y}%;color:${c};font:700 clamp(10px,1.6vw,20px) monospace`; }
+        const p = document.createElement("img");
+        p.className = "fx"; p.alt = ""; p.draggable = false;
+        p.src = SP(img[i % img.length]);
+        p.style.cssText = `left:${x}%;bottom:${y}%;width:${size * 2.4}%;height:auto`;
         this.el.appendChild(p);
-        const dx = (Math.random() - .5) * spread, dy = up * (.5 + Math.random());
-        p.animate([{ transform: "translate(0,0)", opacity: 1 }, { transform: `translate(${dx * 8}px,${-dy * 6}px)`, opacity: 0 }],
+        const dx = (Math.random() - .5) * spread, dy = up * (.5 + Math.random()), r = spin ? (Math.random() - .5) * 240 : 0;
+        p.animate([{ transform: "translate(0,0) scale(.6)", opacity: 1 }, { transform: `translate(${dx * 8}px,${-dy * 6}px) rotate(${r}deg) scale(1)`, opacity: 0 }],
           { duration: dur * (.7 + Math.random() * .6), easing: "cubic-bezier(.2,.7,.3,1)" }).onfinish = () => p.remove();
       }
     }
@@ -90,14 +89,10 @@
 
   S.p1 = async s => {
     s.label("Cà Mau · 20–21/12/2026");
-    const dash = document.createElement("div"); dash.className = "road-dash";
-    dash.style.cssText = "position:absolute;left:0;right:0;bottom:9%;height:1.4%;background:repeating-linear-gradient(90deg,#f3e2b8 0 3%,transparent 3% 6%);z-index:2";
-    s.el.appendChild(dash);
     const kids = [s.add("be_trai", { x: 80, y: 6, h: 30, flip: true }), s.add("be_gai", { x: 90, y: 6, h: 29, flip: true }), s.add("ba_cu", { x: 70, y: 7, h: 32, flip: true })];
     const bus = s.add("b_xebus", { x: -40, y: 5, h: 46, z: 60 });
-    const roll = dash.animate([{ backgroundPosition: "0 0" }, { backgroundPosition: "-200% 0" }], { duration: 2600, easing: "ease-out" });
     await s.move(bus, 26, 2600, { ease: "cubic-bezier(.2,.8,.3,1)" });
-    s.burst(12, 8, { colors: ["#d8c4a0", "#c9b28c"], up: 6, spread: 6, n: 10 });
+    s.burst(12, 8, { img: ["fx_bui"], up: 6, spread: 6, n: 6, size: 2, spin: false });
     await s.wait(300);
     const tnv = s.add("tnv_nam_di1", { x: 36, y: 6, h: 34 });
     const bs = s.add("bac_si", { x: 32, y: 6, h: 34 });
@@ -149,7 +144,7 @@
     const bg = s.add("be_gai", { x: 80, y: 6, h: 29 });
     for (let k = 0; k < 4; k++) {
       cau.animate([{ bottom: "30%" }, { bottom: "78%" }, { bottom: "30%" }], { duration: 1100, easing: "ease-in-out" });
-      s.burst(56, 30, { n: 10, colors: ["#e2453a", "#f2c14e", "#2e9ad6", "#4cbb5a", "#c25bd6"], up: 14, spread: 14 });
+      s.burst(56, 30, { n: 10, img: ["fx_mai", "fx_dao", "fx_lapLanh"], up: 14, spread: 14 });
       await s.wait(1100);
     }
     s.set(nu, "tnv_nu_lixi");
@@ -161,7 +156,6 @@
   };
 
   S.p4 = async s => {
-    const spot = document.createElement("div"); spot.className = "spot-light"; s.el.appendChild(spot);
     const fl = document.createElement("div"); fl.className = "flash"; s.el.appendChild(fl);
     const score = s.label("Smile Score: 0", "scene-score");
     s.label("Tết trao – Xuân đoàn viên · 23–24/01/2027");
@@ -169,7 +163,7 @@
     const pb = s.add("b_photobooth", { x: 90, y: 4, h: 52, flip: true });
     const mc = s.add("mc", { x: 50, y: 30, h: 36 });
     const qua = s.add("q_chongqua", { x: 38, y: 30, h: 16 });
-    const coins = setInterval(() => s.on && s.burst(9, 52, { n: 4, colors: ["#ffd84a", "#ffb000"], up: 16, spread: 6, size: 1.1 }), 700);
+    const coins = setInterval(() => s.on && s.burst(9, 52, { n: 3, img: ["fx_xu"], up: 16, spread: 6, size: 1.3 }), 700);
     try {
       s.say(mc, "Chào mừng các bạn nhỏ!", 2200);
       const kids = [s.add("be_trai", { x: 108, y: 6, h: 30, flip: true }), s.add("be_gai", { x: 116, y: 6, h: 29, flip: true }), s.add("c_sinhvien", { x: 124, y: 6, h: 34, flip: true })];
@@ -187,7 +181,7 @@
       s.say(kids[2], "Cười tươi nào!");
       for (let i = 0; i <= 100; i += 4) { score.textContent = "Smile Score: " + Math.min(i, 98); await s.wait(30); }
       fl.classList.remove("on"); void fl.offsetWidth; fl.classList.add("on");
-      s.burst(80, 50, { n: 26, colors: ["#ffd84a", "#fff", "#7ee081"] });
+      s.burst(80, 50, { n: 22, img: ["fx_xu", "fx_lapLanh", "fx_mai"] });
       await s.wait(2400);
     } finally { clearInterval(coins); }
   };
@@ -196,15 +190,20 @@
     s.label("TT dưỡng lão Thị Nghè · 30/01/2027");
     s.add("q_mai", { x: 8, y: 4, h: 34 });
     const ghe = s.add("b_ghecattoc", { x: 40, y: 4, h: 44 });
-    const ct = s.add("c_cattoc", { x: 56, y: 6, h: 35, flip: true });
+    const ct = s.add("c_cattoc", { x: 58, y: 6, h: 35, flip: true });
     const ba = s.add("ba_cu", { x: 100, y: 6, h: 33, flip: true });
     const nu = s.add("tnv_nu", { x: 84, y: 6, h: 34, flip: true });
-    await s.move(ba, 44, 2600);
-    s.say(ct, "Cụ ngồi đây con hớt tóc nhé!");
-    for (let i = 0; i < 5; i++) { s.burst(46, 34, { n: 6, colors: ["#bbb", "#888"], up: 5, spread: 6, size: .8 }); await s.wait(380); }
-    s.flip(ba, false); s.say(ba, "Đẹp quá, cảm ơn các cháu!", 2000);
+    s.say(ct, "Mời cụ ngồi, con hớt tóc nhé!", 2200);
+    await s.move(ba, 47, 2600);
+    // bà ngồi lên ghế: thay ghế trống bằng sprite "bà ngồi ghế" (Gemini)
+    ba.style.display = "none";
+    s.set(ghe, "ba_ngoighe"); ghe.style.height = "52%";
+    await s.wait(500);
+    for (let i = 0; i < 5; i++) { s.burst(44, 34, { img: ["fx_toc"], n: 2, up: -4, spread: 5, size: 1.4, spin: false }); await s.wait(420); }
+    s.burst(42, 40, { n: 6, img: ["fx_lapLanh"], up: 8, spread: 8 });
+    s.say(ghe, "Đẹp quá, cảm ơn các cháu!", 2200);
     await s.wait(1200);
-    s.set(nu, "tnv_nu_lixi"); s.burst(58, 40, { n: 16 });
+    s.set(nu, "tnv_nu_lixi"); s.burst(58, 40, { n: 12 });
     await s.wait(2600);
   };
 
@@ -214,8 +213,8 @@
     const tb = s.add("c_thuongbinh", { x: 70, y: 6, h: 36, flip: true });
     const nau = s.add("c_naubanh", { x: 24, y: 4, h: 38 });
     const gt = s.add("c_guitar", { x: 88, y: 5, h: 32, flip: true });
-    const steam = setInterval(() => s.on && s.burst(22, 30, { n: 3, colors: ["rgba(255,255,255,.9)", "rgba(230,230,230,.8)"], up: 14, spread: 4, size: 1.6, dur: 1600 }), 260);
-    const notes = setInterval(() => s.on && s.burst(86, 34, { n: 1, colors: ["#b3131f", "#2a1a12"], up: 12, spread: 6, shape: "♪", dur: 1600 }), 600);
+    const steam = setInterval(() => s.on && s.burst(22, 30, { n: 1, img: ["fx_khoi"], up: 14, spread: 4, size: 2.4, dur: 1800, spin: false }), 260);
+    const notes = setInterval(() => s.on && s.burst(86, 34, { n: 1, img: ["fx_notnhac"], up: 12, spread: 6, size: 1.3, dur: 1600 }), 600);
     try {
       const tnv = s.add("tnv_nam_omqua", { x: 36, y: 6, h: 35 });
       await s.move(tnv, 60, 1800);

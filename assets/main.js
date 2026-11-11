@@ -99,42 +99,49 @@
   }), { threshold: .15 });
   document.querySelectorAll(".reveal").forEach(el => io.observe(el));
 
-  // ---------- PHÁO HOA PIXEL ----------
-  function fireworks(cv, { rate = 0.03, palette = ["#ffd84a", "#ff5a4a", "#fff", "#7ee0ff", "#ff9ad1"] } = {}) {
-    const g = cv.getContext("2d"); let W, H, parts = [], rockets = [], on = false;
-    const PX = 4;
-    const size = () => { W = cv.width = cv.clientWidth / 2; H = cv.height = cv.clientHeight / 2; g.imageSmoothingEnabled = false; };
+  // ---------- PHÁO HOA & HOA MAI RƠI (sprite vẽ bằng Gemini) ----------
+  const loadImg = n => { const i = new Image(); i.src = `assets/sprites/${n}.png`; return i; };
+  const FW = ["fx_phaohoa_vang", "fx_phaohoa_do", "fx_phaohoa_xanh"].map(loadImg);
+  const SPARK = loadImg("fx_lapLanh");
+  function fireworks(cv, { rate = 0.03 } = {}) {
+    const g = cv.getContext("2d"); let W, H, rockets = [], booms = [], on = false;
+    const size = () => { W = cv.width = cv.clientWidth; H = cv.height = cv.clientHeight; g.imageSmoothingEnabled = false; };
     size(); addEventListener("resize", size);
     function tick() {
       if (!on) return;
       g.clearRect(0, 0, W, H);
-      if (Math.random() < rate) rockets.push({ x: W * (.1 + Math.random() * .8), y: H, vy: -(H / 70) * (1 + Math.random() * .4), ty: H * (.12 + Math.random() * .3), c: palette[Math.random() * palette.length | 0] });
+      if (Math.random() < rate) rockets.push({ x: W * (.1 + Math.random() * .8), y: H, vy: -(H / 70) * (1 + Math.random() * .4), ty: H * (.12 + Math.random() * .3), im: FW[Math.random() * FW.length | 0] });
       rockets = rockets.filter(r => {
-        r.y += r.vy; g.fillStyle = "#fff"; g.fillRect(r.x | 0, r.y | 0, 2, 3);
-        if (r.y <= r.ty) { for (let i = 0; i < 40; i++) { const a = Math.random() * 6.28, s = Math.random() * 2.2 + .6; parts.push({ x: r.x, y: r.y, vx: Math.cos(a) * s, vy: Math.sin(a) * s, l: 60 + Math.random() * 30, c: r.c }); } return false; }
+        r.y += r.vy;
+        if (SPARK.complete) g.drawImage(SPARK, r.x - 8, r.y - 8, 16, 16);
+        if (r.y <= r.ty) { booms.push({ x: r.x, y: r.y, t: 0, s: Math.min(W, H) * (.09 + Math.random() * .07), im: r.im }); return false; }
         return true;
       });
-      parts = parts.filter(p => { p.x += p.vx; p.y += p.vy; p.vy += .03; p.vx *= .98; p.l--; g.globalAlpha = Math.max(0, p.l / 80); g.fillStyle = p.c; g.fillRect(p.x | 0, p.y | 0, 2, 2); return p.l > 0; });
-      g.globalAlpha = 1;
+      booms = booms.filter(b => {
+        b.t++; const k = b.t / 70, sc = b.s * (.3 + Math.min(1, k * 2.2) * .7);
+        g.globalAlpha = Math.max(0, 1 - k * k);
+        if (b.im.complete) g.drawImage(b.im, b.x - sc / 2, b.y - sc / 2 + k * 10, sc, sc);
+        g.globalAlpha = 1; return k < 1;
+      });
       requestAnimationFrame(tick);
     }
     new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting && !on) { on = true; tick(); } else if (!e.isIntersecting) on = false; })).observe(cv.parentElement);
   }
-  fireworks($("#heroFx"), { rate: .05 });
-  fireworks(document.querySelector(".fw-canvas"), { rate: .035 });
+  fireworks($("#heroFx"), { rate: .03 });
+  fireworks(document.querySelector(".fw-canvas"), { rate: .025 });
 
-  // ---------- CÁNH MAI RƠI ----------
   (function petals(cv) {
     const g = cv.getContext("2d"); let W, H, ps = [], on = false;
-    const size = () => { W = cv.width = cv.clientWidth / 3; H = cv.height = cv.clientHeight / 3; };
+    const IM = [loadImg("fx_mai"), loadImg("fx_mai"), loadImg("fx_dao")];
+    const size = () => { W = cv.width = cv.clientWidth; H = cv.height = cv.clientHeight; g.imageSmoothingEnabled = false; };
     size(); addEventListener("resize", size);
-    for (let i = 0; i < 60; i++) ps.push({ x: Math.random(), y: Math.random(), s: .3 + Math.random() * .7, p: Math.random() * 6 });
+    for (let i = 0; i < 36; i++) ps.push({ x: Math.random(), y: Math.random(), s: .4 + Math.random() * .6, p: Math.random() * 6, im: IM[i % 3] });
     function tick() {
       if (!on) return; g.clearRect(0, 0, W, H);
       ps.forEach(p => {
         p.y += .0012 * p.s; p.p += .03; if (p.y > 1.02) { p.y = -.02; p.x = Math.random(); }
-        const x = (p.x + Math.sin(p.p) * .01) * W, y = p.y * H;
-        g.fillStyle = p.s > .6 ? "#f6c02e" : "#ffd75e"; g.fillRect(x | 0, y | 0, 3, 3); g.fillStyle = "#e09a10"; g.fillRect((x | 0) + 1, (y | 0) + 1, 1, 1);
+        const x = (p.x + Math.sin(p.p) * .01) * W, y = p.y * H, z = 14 + p.s * 14;
+        if (p.im.complete) { g.save(); g.translate(x, y); g.rotate(Math.sin(p.p) * .6); g.drawImage(p.im, -z / 2, -z / 2, z, z); g.restore(); }
       });
       requestAnimationFrame(tick);
     }
