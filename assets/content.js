@@ -85,7 +85,7 @@ window.SITE = {
     ["h_yssc_123.jpg", "Tổ ấm ngày xuân · Tao Đàn"], ["h_yssc_181.jpg", "Bữa trưa cho 2.000 trẻ em"],
     ["h_yssc_207.jpg", "Tết cho người cao tuổi"], ["h_yssc_029.jpg", "Xuân yêu thương 2026 · Thị Nghè"],
     ["h_yssc_005.jpg", "Xuân biên giới 2021"], ["h_yssc_136.jpg", "Thăm thương binh Long Đất"],
-    ["h_yssc_010.jpg", "Không gian Tết truyền thống"], ["h_hssv_061.jpg", "Họp mặt sinh viên đón Tết xa nhà"],
+    ["h_yssc_010.jpg", "Không gian Tết truyền thống"], ["h_yssc_121.jpg", "Lì xì đầu năm cho các em"],
     ["h_yssc_173.jpg", "Niềm vui Tổ ấm ngày xuân"], ["h_yssc_206.jpg", "Gói yêu thương – Tết đong đầy"],
     ["h_hssv_115.jpg", "Xuân này xuân của tình người"], ["h_yssc_151.jpg", "Trao 600 phần quà Tết 2020"],
     ["h_yssc_186.jpg", "Các em sẵn sàng đón xuân"], ["h_yssc_209.jpg", "Sân chơi Sắc màu quanh em"],
