@@ -189,7 +189,7 @@
   S.p5 = async s => {
     s.label("TT dưỡng lão Thị Nghè · 30/01/2027");
     s.add("q_mai", { x: 8, y: 4, h: 34 });
-    const ghe = s.add("b_ghecattoc", { x: 40, y: 4, h: 44 });
+    const ghe = s.add("b_ghecattoc", { x: 40, y: 4, h: 34 });
     const ct = s.add("c_cattoc", { x: 58, y: 6, h: 35, flip: true });
     const ba = s.add("ba_cu", { x: 100, y: 6, h: 33, flip: true });
     const nu = s.add("tnv_nu", { x: 84, y: 6, h: 34, flip: true });
@@ -197,7 +197,7 @@
     await s.move(ba, 47, 2600);
     // bà ngồi lên ghế: thay ghế trống bằng sprite "bà ngồi ghế" (Gemini)
     ba.style.display = "none";
-    s.set(ghe, "ba_ngoighe"); ghe.style.height = "52%";
+    s.set(ghe, "ba_ngoighe"); ghe.style.height = "37%";
     await s.wait(500);
     for (let i = 0; i < 5; i++) { s.burst(44, 34, { img: ["fx_toc"], n: 2, up: -4, spread: 5, size: 1.4, spin: false }); await s.wait(420); }
     s.burst(42, 40, { n: 6, img: ["fx_lapLanh"], up: 8, spread: 8 });
