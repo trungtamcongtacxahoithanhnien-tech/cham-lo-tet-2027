@@ -247,3 +247,8 @@ p{margin:0 0 1em}
 .hero{background:#070a24 url(bg/hero.png) center bottom/cover no-repeat}
 .hero-scene{background:none!important;height:32vh!important}
 .hero:after{background:linear-gradient(180deg,rgba(7,10,36,.75) 0%,rgba(7,10,36,.35) 45%,transparent 65%)!important}
+/* Logo Trung tâm */
+.brand-logo{width:36px;height:36px;border-radius:50%;background:#fff;box-shadow:0 0 0 2px var(--gold)}
+.hero-org{display:flex;align-items:center;gap:16px;margin-bottom:10px}.hero-org .eyebrow{margin:0;line-height:1.25}.hero-logo{width:76px;height:76px;flex:none;border-radius:50%;background:#fff;box-shadow:0 0 0 3px var(--gold),0 6px 18px rgba(0,0,0,.4)}
+.foot-logo{width:56px;height:56px;border-radius:50%;background:#fff;display:block;margin:0 auto 10px}
+@media(max-width:600px){.brand{font-size:20px;white-space:nowrap}.brand-logo{width:30px;height:30px}.hero-logo{width:58px;height:58px}.hero-org{gap:12px}}
