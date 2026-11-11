@@ -18,20 +18,49 @@
     `<li><a href="#${p.id}"><b>${p.querySelector(".prog-no").textContent}</b><span>${p.querySelector("h3").textContent.split("·")[0].replace(/"/g, "").trim()}</span></a></li>`).join("");
 
   // ---------- NGŨ HÀNH ----------
-  // Hình động pixel cho từng khu (sprite vẽ bằng Gemini): [tên, trái%, cao%, hiệu ứng, lật?]
+  // Hình động pixel cho từng khu – mỗi hoạt động một cảnh (sprite vẽ bằng Gemini)
+  // [tên sprite, trái%, cao%, hiệu ứng, đáy%]
   const NH_ANIM = [
-    [["nh_caynon", 70, 62, "grow"], ["nh_tuoicay", 30, 70, "bob"], ["fx_mai", 55, 16, "float", 0, 18], ["fx_dao", 85, 14, "float d2", 0, 30]],
-    [["c_naubanh", 30, 76, "bob"], ["fx_khoi", 22, 22, "rise", 0, 40], ["c_guitar", 75, 66, "sway"], ["fx_notnhac", 82, 16, "rise d2", 0, 50]],
-    [["nh_tnv_qua", 25, 70, "walk"], ["be_gai_lixi", 76, 64, "jump"], ["fx_lapLanh", 60, 16, "twinkle", 0, 58]],
-    [["nh_giancho", 70, 74, "none"], ["c_ongdo", 26, 66, "bob"], ["fx_xu", 46, 15, "rise", 0, 40], ["fx_xu", 90, 13, "rise d2", 0, 50]],
-    [["nh_hienmau", 26, 72, "bob"], ["nh_ngamchan", 72, 60, "sway"], ["fx_tim", 40, 15, "rise", 0, 52], ["fx_khoi", 82, 18, "rise d2", 0, 50]]
+    [ // MỘC
+      [["q_mai", 25, 70, "sway"], ["q_dao", 75, 70, "sway d2"], ["fx_mai", 50, 14, "float"], ["fx_dao", 60, 12, "float d2"]],
+      [["nh_tohe", 20, 58, "bob"], ["nh_camhoa", 52, 62, "none"], ["nh_longden", 83, 60, "bob d2"]],
+      [["b_taiche", 30, 64, "none"], ["nh_caynon", 74, 56, "grow"], ["fx_lapLanh", 56, 14, "twinkle", 52]],
+      [["b_photobooth", 30, 72, "none"], ["b_cayled", 74, 74, "glowpx"], ["fx_xu", 52, 13, "rise", 40]]
+    ],
+    [ // HỎA
+      [["c_vetranh", 18, 58, "bob"], ["nh_lacxam", 50, 60, "jump"], ["nh_kinhlup", 82, 58, "bob d2"]],
+      [["nh_goibanh", 50, 64, "bob"], ["fx_lapLanh", 82, 14, "twinkle", 60]],
+      [["c_naubanh", 30, 70, "bob"], ["c_guitar", 76, 62, "sway"], ["fx_khoi", 22, 20, "rise", 42], ["fx_notnhac", 84, 14, "rise d2", 52]],
+      [["b_oanquan", 32, 46, "none"], ["c_dacau", 74, 64, "jump"]]
+    ],
+    [ // THỔ
+      [["nh_tnv_qua", 25, 68, "walk"], ["be_gai_lixi", 76, 62, "jump"], ["fx_lapLanh", 58, 14, "twinkle", 58]],
+      [["c_sinhvien", 28, 66, "bob"], ["tnv_nu_lixi", 72, 66, "bob d2"], ["fx_xu", 50, 13, "rise", 40]]
+    ],
+    [ // KIM
+      [["c_ongdo", 45, 66, "bob"], ["fx_lapLanh", 80, 14, "twinkle", 50]],
+      [["nh_giancho", 30, 72, "none"], ["nh_xelan", 76, 64, "bob"], ["fx_xu", 54, 12, "rise", 44]],
+      [["nh_vungsau", 50, 66, "bob"], ["fx_lapLanh", 86, 13, "twinkle", 56]]
+    ],
+    [ // THỦY
+      [["nh_hienmau", 30, 70, "bob"], ["b_hienmau", 74, 66, "none"], ["fx_tim", 50, 14, "rise", 50]],
+      [["bac_si", 30, 66, "bob"], ["q_thuoc", 72, 50, "none"]],
+      [["nh_tra", 18, 30, "none"], ["nh_massage", 50, 62, "bob"], ["nh_ngamchan", 84, 52, "sway"], ["fx_khoi", 18, 16, "rise", 34]]
+    ]
   ];
-  const nhAnim = i => `<div class="nh-anim" aria-hidden="true">${(NH_ANIM[i] || []).map(([n, x, h, fx, f, y]) =>
-    `<img class="nh-sp ${fx}" src="assets/sprites/${n}.png" alt="" style="left:${x}%;height:${h}%;bottom:${y ?? 6}%${f ? ";transform:scaleX(-1)" : ""}">`).join("")}</div>`;
+  const nhAnim = (i, hd) => `<div class="nh-anim" aria-hidden="true">${(NH_ANIM[i] || []).map((sc, k) =>
+    `<div class="nh-slide${k ? "" : " show"}">${sc.map(([n, x, h, fx, y]) =>
+      `<img class="nh-sp ${fx}" src="assets/sprites/${n}.png" alt="" loading="lazy" style="left:${x}%;height:${h}%;bottom:${y ?? 15}%">`).join("")}
+      <span class="nh-cap">${(hd[k] || "").split(":")[0].replace(/"/g, "").trim()}</span></div>`).join("")}</div>`;
   $("#nguHanh").innerHTML = D.nguHanh.map((n, i) => `
     <div class="nh${i === 0 ? " on" : ""}" style="--c:${n.mau}" tabindex="0">
-      ${nhAnim(i)}
+      ${nhAnim(i, n.hd)}
       <b>${n.ten}</b><span>${n.khu}</span><ul>${n.hd.map(h => `<li>${h}</li>`).join("")}</ul></div>`).join("");
+  setInterval(() => document.querySelectorAll(".nh-anim").forEach(a => {
+    const sl = [...a.children]; if (sl.length < 2) return;
+    const k = sl.findIndex(x => x.classList.contains("show"));
+    sl[k].classList.remove("show"); sl[(k + 1) % sl.length].classList.add("show");
+  }), 3200);
   document.querySelectorAll(".nh").forEach(el => el.onclick = el.onkeydown = e => {
     if (e.type === "keydown" && e.key !== "Enter") return;
     document.querySelectorAll(".nh").forEach(x => x.classList.toggle("on", x === el));
