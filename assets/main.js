@@ -48,10 +48,11 @@
       [["nh_tra", 18, 30, "none"], ["nh_massage", 50, 62, "bob"], ["nh_ngamchan", 84, 52, "sway"], ["fx_khoi", 18, 16, "rise", 34]]
     ]
   ];
+  const nhCap = t => { t = (t || "").split(":")[0].replace(/"/g, "").trim(); return t.length > 26 ? t.split(" – ")[0] : t; };
   const nhAnim = (i, hd) => `<div class="nh-anim" aria-hidden="true">${(NH_ANIM[i] || []).map((sc, k) =>
     `<div class="nh-slide${k ? "" : " show"}">${sc.map(([n, x, h, fx, y]) =>
       `<img class="nh-sp ${fx}" src="assets/sprites/${n}.png" alt="" loading="lazy" style="left:${x}%;height:${h}%;bottom:${y ?? 15}%">`).join("")}
-      <span class="nh-cap">${(hd[k] || "").split(":")[0].replace(/"/g, "").trim()}</span></div>`).join("")}</div>`;
+      <span class="nh-cap">${nhCap(hd[k])}</span></div>`).join("")}</div>`;
   $("#nguHanh").innerHTML = D.nguHanh.map((n, i) => `
     <div class="nh${i === 0 ? " on" : ""}" style="--c:${n.mau}" tabindex="0">
       ${nhAnim(i, n.hd)}
