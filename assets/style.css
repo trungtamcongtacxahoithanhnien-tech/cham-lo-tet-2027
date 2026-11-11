@@ -1,7 +1,7 @@
 :root{
-  --red:#b3131f; --red-d:#7d0b14; --red-l:#e2453a;
-  --gold:#f2c14e; --gold-d:#c8932a; --cream:#fff7e8; --paper:#fdf1dc;
-  --ink:#2a1a12; --muted:#6d5646; --night:#151034;
+  --red:#e0262d; --red-d:#c0182a; --red-l:#ff6a4d;
+  --gold:#ffc53a; --gold-d:#f0a020; --cream:#fffbf3; --paper:#fff3df;
+  --ink:#3b2316; --muted:#7a5d4a; --night:#151034;
   --radius:18px; --px:4px;
 }
 *{box-sizing:border-box}
@@ -256,3 +256,27 @@ p{margin:0 0 1em}
 .hero-org{display:flex;align-items:center;gap:16px;margin-bottom:10px}.hero-org .eyebrow{margin:0;line-height:1.25}.hero-logo{width:76px;height:76px;flex:none;border-radius:50%;background:#fff;box-shadow:0 0 0 3px var(--gold),0 6px 18px rgba(0,0,0,.4)}
 .foot-logo{width:56px;height:56px;border-radius:50%;background:#fff;display:block;margin:0 auto 10px}
 @media(max-width:600px){.brand{font-size:20px;white-space:nowrap}.brand-logo{width:30px;height:30px}.hero-logo{width:58px;height:58px}.hero-org{gap:12px}}
+
+/* ===== Bảng màu tươi sáng ===== */
+.nav.solid{background:rgba(224,38,45,.96)}
+.stats{background:linear-gradient(135deg,#ff6a3d 0%,#e0262d 60%,#d61f5c 100%)}
+.stat{background:rgba(255,255,255,.16);border-color:rgba(255,255,255,.35)}
+.programs{background:linear-gradient(180deg,#fffbf3,#fff1d6)}
+.fx-stage{background:linear-gradient(160deg,#fff1e6 0%,#ffd9c2 55%,#ffc9d6 100%);color:var(--ink)}
+.fx-stage .prog-meta,.fx-stage p{color:var(--muted)}
+.fx-stage .prog-no{color:var(--red)}
+.fx-lantern{background:linear-gradient(160deg,#fff7d6 0%,#ffe3b0 50%,#ffd0c4 100%);color:var(--ink)}
+.fx-lantern p,.fx-lantern .prog-meta{color:var(--muted)}
+.fx-lantern .prog-no{color:var(--red)}
+.fx-stage h3 em,.fx-lantern h3 em{color:var(--red)}
+.calc{background:#fff;border-color:var(--ink);box-shadow:4px 4px 0 var(--gold)}
+.nh{background:#fff;color:var(--ink)}
+.pho-tet{background:linear-gradient(160deg,#ff6a3d 0%,#e0262d 55%,#c0182a 100%)}
+.memories{background:linear-gradient(160deg,#ff8a3d 0%,#ff5a4a 50%,#e0265e 100%)}
+.foot{background:#c0182a;color:#ffe9d6}
+@media(max-width:820px){.nav-links{background:var(--red)}}
+.nh b{filter:none}
+.nh span{color:var(--muted)}
+.nh ul{color:var(--ink)}
+.calc output{color:var(--red)}
+.pho-tet .eyebrow,.memories .eyebrow,.stats .eyebrow{color:#fff6c2}
