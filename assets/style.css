@@ -59,8 +59,8 @@ p{margin:0 0 1em}
 .scroll-hint{position:absolute;bottom:22px;left:50%;transform:translateX(-50%);z-index:4;color:var(--gold);text-decoration:none;font-size:22px;animation:bob 1.6s infinite}
 
 /* ---------- SCENE (pixel stage) ---------- */
-.scene{position:relative;width:100%;aspect-ratio:400/170;overflow:hidden;background-size:100% 100%;background-color:#9cc;
-  image-rendering:pixelated;border:var(--px) solid var(--ink);box-shadow:8px 8px 0 rgba(0,0,0,.25);border-radius:6px}
+.scene{position:relative;width:100%;aspect-ratio:400/170;overflow:hidden;background-size:cover;background-position:center bottom;background-color:#9cc;
+  border:var(--px) solid var(--ink);box-shadow:8px 8px 0 rgba(0,0,0,.25);border-radius:6px}
 .scene-tall{aspect-ratio:400/150;margin:28px 0}
 .sprite{position:absolute;image-rendering:pixelated;transform-origin:50% 100%;will-change:transform,left;pointer-events:none}
 .sprite.flip{transform:scaleX(-1)}
@@ -242,3 +242,8 @@ p{margin:0 0 1em}
 }
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 @media (max-width:560px){.scene-label{display:none}}
+.fx-stage h3 em,.fx-lantern h3 em{color:var(--gold)}
+
+.hero{background:#070a24 url(bg/hero.png) center bottom/cover no-repeat}
+.hero-scene{background:none!important;height:32vh!important}
+.hero:after{background:linear-gradient(180deg,rgba(7,10,36,.75) 0%,rgba(7,10,36,.35) 45%,transparent 65%)!important}

@@ -79,9 +79,9 @@
 
   S.hero = async s => {
     const team = [["tnv_nam_omqua", 34], ["be_trai_omqua", 30], ["tnv_nu_lixi", 34], ["be_gai_lixi", 29], ["c_sinhvien", 34], ["bo_doi", 35], ["ba_cu", 32], ["tnv_nam", 34]];
-    s.add("q_mai", { x: 5, y: 3, h: 50 }); s.add("q_dao", { x: 95, y: 3, h: 50 });
+    s.add("q_mai", { x: 5, y: 4, h: 46 }); s.add("q_dao", { x: 95, y: 4, h: 46 });
     const walkers = team.map(([n, h], i) => {
-      const sp = s.add(n, { x: -8 - i * 13, y: 4, h: h * 1.6 });
+      const sp = s.add(n, { x: -8 - i * 13, y: 6, h: h * 1.5 });
       return sp;
     });
     // đi diễu hành liên tục
