@@ -38,7 +38,7 @@ window.SITE = {
 
   // ---------- Gói tài trợ (ĐỀ XUẤT – chờ duyệt) ----------
   goi: [
-    { ten: "Kim Cương", muc: "Từ 300 triệu", mau: "#7fd3e8", noiBat: true,
+    { ten: "Kim Cương", muc: "Từ 500 triệu", mau: "#7fd3e8", noiBat: true,
       mo: "Nhà tài trợ chính toàn bộ chương trình chăm lo Tết 2027" },
     { ten: "Vàng", muc: "Từ 150 triệu", mau: "#e8b93c",
       mo: "Đồng hành chính 01 chương trình (Tổ ấm ngày xuân hoặc Triệu nụ cười)" },
