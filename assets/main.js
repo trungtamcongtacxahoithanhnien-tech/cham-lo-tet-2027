@@ -135,12 +135,12 @@
     const IM = [loadImg("fx_mai"), loadImg("fx_mai"), loadImg("fx_dao")];
     const size = () => { W = cv.width = cv.clientWidth; H = cv.height = cv.clientHeight; g.imageSmoothingEnabled = false; };
     size(); addEventListener("resize", size);
-    for (let i = 0; i < 36; i++) ps.push({ x: Math.random(), y: Math.random(), s: .4 + Math.random() * .6, p: Math.random() * 6, im: IM[i % 3] });
+    for (let i = 0; i < 18; i++) ps.push({ x: Math.random(), y: Math.random(), s: .4 + Math.random() * .6, p: Math.random() * 6, im: IM[i % 3] });
     function tick() {
       if (!on) return; g.clearRect(0, 0, W, H);
       ps.forEach(p => {
         p.y += .0012 * p.s; p.p += .03; if (p.y > 1.02) { p.y = -.02; p.x = Math.random(); }
-        const x = (p.x + Math.sin(p.p) * .01) * W, y = p.y * H, z = 14 + p.s * 14;
+        const x = (p.x + Math.sin(p.p) * .01) * W, y = p.y * H, z = 9 + p.s * 9;
         if (p.im.complete) { g.save(); g.translate(x, y); g.rotate(Math.sin(p.p) * .6); g.drawImage(p.im, -z / 2, -z / 2, z, z); g.restore(); }
       });
       requestAnimationFrame(tick);
