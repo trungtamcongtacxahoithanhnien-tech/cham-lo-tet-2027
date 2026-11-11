@@ -4,10 +4,10 @@
 window.SITE = {
   // ---------- Thông tin liên hệ (TODO: điền) ----------
   lienHe: {
-    hoTen: "Đ/c Nguyễn Thảo Duy",
-    chucVu: "Trưởng Phòng Tổ chức – Hành chính – Quản trị",
-    dienThoai: "094 78 79 771",
-    email: "thaoduy@hotrosinhvien.vn",
+    hoTen: "[Họ tên người phụ trách]",
+    chucVu: "[Chức vụ]",
+    dienThoai: "[Số điện thoại]",
+    email: "[Email]",
     diaChi: "Số 5 Đinh Tiên Hoàng, Phường Sài Gòn, TP. Hồ Chí Minh",
     fanpage: "https://www.facebook.com/TTCTXHTPHCM"
   },
