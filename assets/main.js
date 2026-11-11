@@ -18,8 +18,19 @@
     `<li><a href="#${p.id}"><b>${p.querySelector(".prog-no").textContent}</b><span>${p.querySelector("h3").textContent.split("·")[0].replace(/"/g, "").trim()}</span></a></li>`).join("");
 
   // ---------- NGŨ HÀNH ----------
+  // Hình động pixel cho từng khu (sprite vẽ bằng Gemini): [tên, trái%, cao%, hiệu ứng, lật?]
+  const NH_ANIM = [
+    [["nh_caynon", 70, 62, "grow"], ["nh_tuoicay", 30, 70, "bob"], ["fx_mai", 55, 16, "float", 0, 18], ["fx_dao", 85, 14, "float d2", 0, 30]],
+    [["c_naubanh", 30, 76, "bob"], ["fx_khoi", 22, 22, "rise", 0, 40], ["c_guitar", 75, 66, "sway"], ["fx_notnhac", 82, 16, "rise d2", 0, 50]],
+    [["nh_tnv_qua", 25, 70, "walk"], ["be_gai_lixi", 76, 64, "jump"], ["fx_lapLanh", 60, 16, "twinkle", 0, 58]],
+    [["nh_giancho", 70, 74, "none"], ["c_ongdo", 26, 66, "bob"], ["fx_xu", 46, 15, "rise", 0, 40], ["fx_xu", 90, 13, "rise d2", 0, 50]],
+    [["nh_hienmau", 26, 72, "bob"], ["nh_ngamchan", 72, 60, "sway"], ["fx_tim", 40, 15, "rise", 0, 52], ["fx_khoi", 82, 18, "rise d2", 0, 50]]
+  ];
+  const nhAnim = i => `<div class="nh-anim" aria-hidden="true">${(NH_ANIM[i] || []).map(([n, x, h, fx, f, y]) =>
+    `<img class="nh-sp ${fx}" src="assets/sprites/${n}.png" alt="" style="left:${x}%;height:${h}%;bottom:${y ?? 6}%${f ? ";transform:scaleX(-1)" : ""}">`).join("")}</div>`;
   $("#nguHanh").innerHTML = D.nguHanh.map((n, i) => `
     <div class="nh${i === 0 ? " on" : ""}" style="--c:${n.mau}" tabindex="0">
+      ${nhAnim(i)}
       <b>${n.ten}</b><span>${n.khu}</span><ul>${n.hd.map(h => `<li>${h}</li>`).join("")}</ul></div>`).join("");
   document.querySelectorAll(".nh").forEach(el => el.onclick = el.onkeydown = e => {
     if (e.type === "keydown" && e.key !== "Enter") return;
