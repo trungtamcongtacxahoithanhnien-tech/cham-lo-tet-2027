@@ -19,7 +19,7 @@ window.SITE = {
     { so: 500, hau: "", nhan: "phần quà cho gia đình chính sách, người có công, người cao tuổi, hộ nghèo", icon: "ba_cu" },
     { so: 600, hau: "", nhan: "phần quà cho người vô gia cư, lao động mưu sinh và chiến sĩ biên giới", icon: "bo_doi" },
     { so: 3, hau: "", nhan: "sân chơi xuân cho trẻ em tại các cơ sở bảo trợ xã hội", icon: "c_dacau" },
-    { so: 3.5, hau: " tỷ", nhan: "đồng nguồn lực xã hội dự kiến vận động", icon: "b_cayled" }
+    { so: 3.5, hau: " tỷ", nhan: "Tổng nguồn lực xã hội dự kiến vận động", icon: "b_cayled" }
   ],
 
   // ---------- 5 khu ngũ hành (chương trình 04) ----------
@@ -36,33 +36,29 @@ window.SITE = {
       hd: ["Hiến máu tình nguyện", "Tâm an vạn sự an: gian hàng chăm sóc sức khỏe, tủ thuốc y tế", "Dưỡng sinh ngày Tết: trà thảo mộc, massage, ngâm chân"] }
   ],
 
-  // ---------- Gói tài trợ (ĐỀ XUẤT – chờ duyệt) ----------
+  // ---------- Hình thức tài trợ ----------
   goi: [
-    { ten: "Kim Cương", muc: "Từ 500 triệu", mau: "#7fd3e8", noiBat: true,
-      mo: "Nhà tài trợ chính toàn bộ chương trình chăm lo Tết 2027" },
-    { ten: "Vàng", muc: "Từ 150 triệu", mau: "#e8b93c",
-      mo: "Đồng hành chính 01 chương trình (Tổ ấm ngày xuân hoặc Triệu nụ cười)" },
-    { ten: "Bạc", muc: "Từ 50 triệu", mau: "#b9c2cc",
-      mo: "Đồng hành 01 chương trình tại cơ sở hoặc tuyến tỉnh" },
-    { ten: "Đồng hành", muc: "Từ 10 triệu", mau: "#d98c5f",
-      mo: "Tài trợ phần quà, học bổng, xe đạp, lì xì cho các em" },
-    { ten: "Góc xuân thương hiệu", muc: "Từ 30 triệu hoặc tự thi công", mau: "#e2453a",
-      mo: "Thiết kế và trang trí 01 góc check-in / gian hàng tại Phố Tết mặt tiền (20/01 – 10/02/2027)" },
-    { ten: "Hiện vật", muc: "Quy đổi theo giá trị", mau: "#5bb36a",
-      mo: "Nhu yếu phẩm, bánh kẹo, quần áo, đồ dùng học tập, thuốc, sản phẩm phục vụ chương trình" }
+    { ten: "Đơn vị Đồng tổ chức", muc: "Từ 500 triệu đồng", mau: "#e0262d", noiBat: true,
+      mo: "Cùng Trung tâm tổ chức toàn bộ chuỗi 07 chương trình chăm lo Tết Đinh Mùi 2027, được ghi danh là Đơn vị đồng tổ chức trên mọi ấn phẩm và hoạt động.",
+      ds: ["Ghi danh đồng tổ chức trên kế hoạch, thư mời, backdrop", "Logo vị trí trung tâm tại sân khấu chính", "02 góc check-in thương hiệu tại Phố Tết", "Phát biểu và trao quà tại chương trình"] },
+    { ten: "Đơn vị Đồng hành", muc: "Mọi mức đóng góp", mau: "#ffb020",
+      mo: "Đồng hành cùng một hoặc nhiều chương trình theo khả năng của đơn vị, quyền lợi tương xứng với nội dung tài trợ.",
+      ds: ["Kinh phí, phần quà, lì xì, học bổng, xe đạp", "Hiện vật: nhu yếu phẩm, bánh kẹo, quần áo, đồ dùng học tập, thuốc", "Sản phẩm của đơn vị làm quà tặng", "Thiết kế, thi công góc xuân / gian hàng tại Phố Tết"] }
   ],
 
-  // Ma trận quyền lợi: cột theo thứ tự [Kim Cương, Vàng, Bạc, Đồng hành, Góc xuân]
+  // Ma trận quyền lợi: cột theo thứ tự quyenLoiCot
+  quyenLoiCot: ["Quyền lợi", "Đồng tổ chức", "Đồng hành"],
   quyenLoi: [
-    ["Logo trên backdrop sân khấu chính các chương trình", "Lớn nhất, vị trí trung tâm", "Lớn", "Vừa", "Nhỏ", "—"],
-    ["Logo trên pano \"Phố Tết gieo mầm xuân\" (20/01 – 10/02)", "✓", "✓", "✓", "—", "✓"],
-    ["Góc check-in / gian hàng mang nhận diện thương hiệu tại mặt tiền", "2 góc", "1 góc", "—", "—", "1 góc"],
-    ["Gian hàng tại \"Chợ Tết yêu thương\" (23 – 24/01)", "✓", "✓", "✓", "—", "✓"],
-    ["Đại diện phát biểu, trao quà trên sân khấu", "✓", "✓", "Trao quà", "—", "—"],
-    ["Nhận diện trên thiệp \"Lộc Xuân\" của photobooth AI Smile Score", "✓", "—", "—", "—", "Tùy chọn"],
-    ["Bài viết cảm ơn trên fanpage Trung tâm", "Bài riêng", "Bài riêng", "Bài chung", "Bài chung", "Bài chung"],
-    ["Logo trên website hồ sơ và video tổng kết", "✓", "✓", "✓", "✓", "✓"],
-    ["Thư cảm ơn / Giấy chứng nhận đồng hành", "✓", "✓", "✓", "✓", "✓"]
+    ["Ghi danh \"Đơn vị đồng tổ chức\" trên kế hoạch, thư mời, backdrop", "✓", "—"],
+    ["Logo trên backdrop sân khấu các chương trình", "Lớn nhất, vị trí trung tâm", "Theo nội dung tài trợ"],
+    ["Logo trên pano \"Phố Tết gieo mầm xuân\" (20/01 – 10/02/2027)", "✓", "✓"],
+    ["Góc check-in / gian hàng mang nhận diện thương hiệu tại mặt tiền", "02 góc", "Khi đăng ký trang trí góc xuân"],
+    ["Gian hàng tại \"Chợ Tết yêu thương\" (23 – 24/01/2027)", "✓", "Theo đăng ký"],
+    ["Đại diện lên sân khấu", "Phát biểu và trao quà", "Trao quà"],
+    ["Nhận diện trên thiệp \"Lộc Xuân\" của photobooth AI Smile Score", "✓", "—"],
+    ["Bài viết cảm ơn trên fanpage Trung tâm", "Bài riêng", "Bài chung"],
+    ["Logo trên website hồ sơ và video tổng kết", "✓", "✓"],
+    ["Nhận hoa, thư cảm ơn và giấy chứng nhận đồng hành", "✓", "✓"]
   ],
 
   // ---------- Lộ trình ----------

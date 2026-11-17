@@ -75,8 +75,8 @@
   // ---------- GÓI TÀI TRỢ ----------
   $("#tierGrid").innerHTML = D.goi.map(g => `
     <div class="tier reveal${g.noiBat ? " hot" : ""}" style="--c:${g.mau}">
-      <div class="gem"></div><h4>${g.ten}</h4><div class="muc">${g.muc}</div><p>${g.mo}</p></div>`).join("");
-  const cols = ["Quyền lợi", "Kim Cương", "Vàng", "Bạc", "Đồng hành", "Góc xuân"];
+      <div class="gem"></div><h4>${g.ten}</h4><div class="muc">${g.muc}</div><p>${g.mo}</p>${g.ds ? `<ul class="tier-ds">${g.ds.map(x => `<li>${x}</li>`).join("")}</ul>` : ""}</div>`).join("");
+  const cols = D.quyenLoiCot;
   $("#benefits").innerHTML = `<thead><tr>${cols.map(c => `<th>${c}</th>`).join("")}</tr></thead>
     <tbody>${D.quyenLoi.map(r => `<tr>${r.map(c => `<td>${c}</td>`).join("")}</tr>`).join("")}</tbody>`;
 
