@@ -342,3 +342,4 @@ p{margin:0 0 1em}
 .tier-ds{margin:14px 0 0;padding-left:18px;font-size:15px}
 .tier-ds li{margin:4px 0}
 @media(max-width:820px){.tier-grid{grid-template-columns:1fr}}
+.letter p:not(.eyebrow):not(.sign){text-align:justify;hyphens:auto}
