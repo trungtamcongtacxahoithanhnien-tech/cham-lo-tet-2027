@@ -91,9 +91,9 @@
   $("#contactCard").innerHTML = `
     <p><b>${L.hoTen}</b> – ${L.chucVu}</p>
     <p>📞 <a href="tel:${L.dienThoai.replace(/\s/g, "")}">${L.dienThoai}</a></p>
-    <p>✉️ <a href="mailto:${L.email}">${L.email}</a></p>
     <p>🏠 ${L.diaChi}</p>
-    <p>📘 <a href="${L.fanpage}" target="_blank" rel="noopener">Fanpage Trung tâm CTXH Thanh niên TP.HCM</a></p>`;
+    <p>📘 <a href="${L.fanpage}" target="_blank" rel="noopener">Fanpage Trung tâm CTXH Thanh niên TP.HCM</a></p>
+    <p>✉️ <a href="mailto:${L.email}">${L.email}</a></p>`;
 
   // ---------- TRƯỚC / SAU (Phố Tết) ----------
   const views = [
