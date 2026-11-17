@@ -2,12 +2,12 @@
 //  NỘI DUNG CÓ THỂ SỬA NHANH – không cần đụng vào code khác
 // =============================================================
 window.SITE = {
-  // ---------- Thông tin liên hệ (TODO: điền) ----------
+  // ---------- Thông tin liên hệ ----------
   lienHe: {
-    hoTen: "[Họ tên người phụ trách]",
-    chucVu: "[Chức vụ]",
-    dienThoai: "[Số điện thoại]",
-    email: "[Email]",
+    hoTen: "Nguyễn Thảo Duy",
+    chucVu: "Trưởng phòng Tổ chức - Hành chính - Quản trị",
+    dienThoai: "0947879771",
+    email: "trungtamcongtacxahoithanhnien@gmail.com",
     diaChi: "Số 5 Đinh Tiên Hoàng, Phường Sài Gòn, TP. Hồ Chí Minh",
     fanpage: "https://www.facebook.com/TTCTXHTPHCM"
   },
